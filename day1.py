@@ -1,7 +1,7 @@
 
 
 
-def loaddata(file_path):
+def load_data(file_path):
    
     with open(file_path, 'r') as file:
         # Initialize two empty lists for the columns
@@ -13,27 +13,33 @@ def loaddata(file_path):
             col2.append(num2)
     return col1, col2
 
-def sortlist(list):
+def sort_list(list):
     # Convert all elements to integers
     int_list = [int(item) for item in list]
-    print(int_list)
     
     # Now, sort the list
     int_list_sort = sorted(int_list)
-    #print(type(int_list_sort[0]))
-    #print()
+ 
     return int_list_sort
+
+def compute_distance(list1, list2):
+    distance_list = []
+    for a, b in zip(list1,list2):
+        if a > b:
+            distance_list.append(a-b)
+        else:
+            distance_list.append(b-a)
+    print(f"the full distance is: {sum(distance_list)}")
 
 def main():
     """
     Main function to execute the program logic.
     """
-    col1, col2 = loaddata("day1_short.txt")
-    #print(col1)
-    sorted_list1 = sortlist(col1)
-    sorted_list2= sortlist(col2)
-    print(sorted_list1)
-    print(sorted_list2)
+    col1, col2 = load_data("day1.txt")
+
+    sorted_list1 = sort_list(col1)
+    sorted_list2= sort_list(col2)
+    compute_distance(sorted_list1, sorted_list2)
     print("completed.")
 
 
