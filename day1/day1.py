@@ -40,7 +40,6 @@ def compute_similarity(list1, list2):
             if a == b:
                 count += 1
         similarity_list.append(a*count)
-    print(similarity_list)
     print(f"the similarity score is: {sum(similarity_list)}")
 
 
@@ -56,6 +55,7 @@ def main():
     print("completed step 1")
 
     compute_similarity(sorted_list1, sorted_list2)
+    print("completed step 2")
 
 
 if __name__ == "__main__":
