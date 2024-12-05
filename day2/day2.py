@@ -36,15 +36,42 @@ def check_order_validity(list):
 
     return is_valid_increase, is_valid_decrease
 
+def check_order_validity_with_fault_tolerance(list):
+    
+    fault_tolerance = 1
+    valid_sequence  = 0
+    index = 0
+
+    while index <= len(list) - 1:
+        if list[index] < list[index+1] and 1 <= abs(list[index] - list[index+1]) <=3:
+            valid_sequence += 1
+        if list[index] > list[index+1] and 1 <= abs(list[index] - list[index+1]) <=3:
+            valid_sequence -= 1
+        index += 1
+
+
+    for i in range(len(list) - 1):
+        if list[i] < list[i+1] and 1 <= abs(list[i] - list[i+1]) <=3:
+            valid_sequence += 1
+        if list[i] > list[i+1] and 1 <= abs(list[i] - list[i+1]) <=3:
+            valid_sequence -= 1
+    
+    if abs(valid_sequence - fault_tolerance) <= len(list)-1:
+        print(valid_sequence)
+        return True
+    else:
+        print(valid_sequence)
+        return False
+
 
 
 def main():
     """
     Main function to execute the program logic.
     """
-    file_path= "day2/day2.txt"
+    file_path= "day2/day2_test.txt"
     reports = load_reports(file_path)
-    print(reports)
+    #print(reports)
     safe_count = 0
     for r in range(len(reports)):
         is_valid_increase, is_valid_decrease = check_order_validity(reports[r])
@@ -53,7 +80,14 @@ def main():
     print(safe_count)
     print("completed step 1")
 
- 
+    safe_count_with_tolerance = 0
+
+    for r in range(len(reports)):
+        is_valid_with_tolerance = check_order_validity_with_fault_tolerance(reports[r])
+        if is_valid_with_tolerance:
+            safe_count_with_tolerance += 1
+    print(safe_count_with_tolerance)
+
     print("completed step 2")
 
 
