@@ -14,9 +14,7 @@ def clean_file_for_digits(input_file,pattern, output_file):
         cleaned_lines.append(cleaned_line)
     
     return cleaned_lines
-    # Write the cleaned lines to the output file
-    #with open(output_file, 'w', encoding='utf-8') as outfile:
-    #    outfile.writelines(cleaned_lines)
+
 
 def multiply_and_add(input_lines,pattern):
     results = []
@@ -34,11 +32,8 @@ def multiply_and_add(input_lines,pattern):
             results.append(result)
             #print(results)
 
-    print(results)
     print(sum(results))
         
-
-
 
 def main():
     """
