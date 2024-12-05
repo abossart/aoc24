@@ -18,7 +18,25 @@ def clean_file_for_digits(input_file,pattern, output_file):
     #with open(output_file, 'w', encoding='utf-8') as outfile:
     #    outfile.writelines(cleaned_lines)
 
+def multiply_and_add(input_lines,pattern):
+    results = []
+    for line in input_lines:
+        # Find all matches of 1 to 3 digit numbers
+        matches = re.findall(pattern, line)
+        for match in matches:
+            print(match)
+            # Extract numbers as strings
+            num1_str, num2_str = match.split(",")
+            # Multiply the numbers
+            result = int(num1_str) * int(num2_str)
+            print(result)
+            # Format the result as "mul(x,y) = result"
+            results.append(result)
+            #print(results)
 
+    print(results)
+    print(sum(results))
+        
 
 
 
@@ -28,11 +46,13 @@ def main():
     """
     # Define the pattern for 1 to 3 digit numbers
     pattern = r'mul\(\d{1,3},\d{1,3}\)'
+    pattern2= r'\d+,\d+'
 
     #file_path= "day3/day3_testfile.txt"
     file_path= "day3/day3.txt"
     # Usage
-    cleaned_file = clean_file_for_digits(file_path,pattern, 'output.txt')   
+    cleaned_file = clean_file_for_digits(file_path,pattern, 'output.txt')  
+    multiply_and_add(cleaned_file,pattern2) 
 
 
 if __name__ == "__main__":
