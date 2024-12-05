@@ -22,12 +22,10 @@ def multiply_and_add(input_lines,pattern):
         # Find all matches of 1 to 3 digit numbers
         matches = re.findall(pattern, line)
         for match in matches:
-            print(match)
             # Extract numbers as strings
             num1_str, num2_str = match.split(",")
             # Multiply the numbers
             result = int(num1_str) * int(num2_str)
-            print(result)
             # Format the result as "mul(x,y) = result"
             results.append(result)
             #print(results)
