@@ -1,9 +1,8 @@
 import re
 
 
-def clean_file_for_digits(input_file,pattern, output_file):
-    with open(input_file, 'r', encoding='utf-8') as infile:
-        lines = infile.readlines()
+def clean_file_for_digits(lines,pattern):
+    
 
     cleaned_lines = []
     for line in lines:
@@ -31,6 +30,11 @@ def multiply_and_add(input_lines,pattern):
             #print(results)
 
     print(sum(results))
+
+def clean_dont(lines,pattern):
+    cleaned_content = [re.sub(pattern, "", lines) for lines in lines]
+    return cleaned_content
+    
         
 
 def main():
@@ -40,12 +44,25 @@ def main():
     # Define the pattern for 1 to 3 digit numbers
     pattern = r'mul\(\d{1,3},\d{1,3}\)'
     pattern2= r'\d+,\d+'
+    pattern3 = r"don't\([^)]*\).*?do\([^)]*\)"
+
+    file_path= "day3/day3_step2_test.txt"
+    file_path= "day3/day3.txt"
+
+    with open(file_path, 'r', encoding='utf-8') as infile:
+        lines = infile.readlines()
 
     #file_path= "day3/day3_testfile.txt"
-    file_path= "day3/day3.txt"
+    
     # Usage
-    cleaned_file = clean_file_for_digits(file_path,pattern, 'output.txt')  
+    cleaned_file = clean_file_for_digits(lines,pattern)  
     multiply_and_add(cleaned_file,pattern2) 
+    
+    cleaned_file_step2_with_do = clean_dont(lines,pattern3)
+    
+    cleaned_file_step2 = clean_file_for_digits(cleaned_file_step2_with_do,pattern) 
+    multiply_and_add(cleaned_file_step2,pattern2) 
+    
 
 
 if __name__ == "__main__":
