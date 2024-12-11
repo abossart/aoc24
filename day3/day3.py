@@ -1,18 +1,14 @@
 import re
 
 
-def clean_file_for_digits(lines,pattern):
-    
 
-    cleaned_lines = []
-    for line in lines:
-        # Find all matches of 1 to 3 digit numbers
-        matches = re.findall(pattern, line)
-        # Join matches into a cleaned line
-        cleaned_line = ' '.join(matches)
-        cleaned_lines.append(cleaned_line)
-    
-    return cleaned_lines
+def clean_file_for_digits(lines,pattern):
+        # Find all matches of 1 to 3 digit numbers in the entire string
+    matches = re.findall(pattern, lines)
+    print(matches)
+    # Join matches into a single string with spaces
+    cleaned_content = ' '.join(matches)
+    return matches
 
 
 def multiply_and_add(input_lines,pattern):
@@ -31,10 +27,11 @@ def multiply_and_add(input_lines,pattern):
 
     print(sum(results))
 
-def clean_dont(lines,pattern):
-    cleaned_content = [re.sub(pattern, "", lines) for lines in lines]
+def clean_dont(content, pattern):
+    # Use re.sub to replace all matches of the pattern in the string
+    cleaned_content = re.sub(pattern, "", content)
     return cleaned_content
-    
+
         
 
 def main():
@@ -46,16 +43,21 @@ def main():
     pattern2= r'\d+,\d+'
     pattern3 = r"don't\([^)]*\).*?do\([^)]*\)"
 
-    file_path= "day3/day3_step2_test.txt"
+    #file_path= "day3/day3_step2_test.txt"
     file_path= "day3/day3.txt"
 
     with open(file_path, 'r', encoding='utf-8') as infile:
-        lines = infile.readlines()
+        lines = infile.read().replace("\n","")
+    #print(all_lines)
+   
+    print(lines)
 
     #file_path= "day3/day3_testfile.txt"
     
     # Usage
+    #cleaned_file = clean_file_for_digits(lines,pattern)  
     cleaned_file = clean_file_for_digits(lines,pattern)  
+    
     multiply_and_add(cleaned_file,pattern2) 
     
     cleaned_file_step2_with_do = clean_dont(lines,pattern3)
